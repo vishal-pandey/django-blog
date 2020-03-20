@@ -1,0 +1,70 @@
+{% extends "user/base.html" %}
+{% block body_block %}
+<div class="container">
+
+	<header><h2 align="center">Shop</h2></header>
+
+	<section class="posts">
+		{% for product in products %}
+			<div class="post" style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+				<img src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MXHW2_AV1?wid=1144&hei=1144&fmt=jpeg&qlt=80&op_usm=0.5,0.5&.v=1572398073879" width="150">
+			    <h3>{{ product.name }}</h3>
+			    <i>{{ product.weight }}</i><br>
+			    <span>
+				    <button class="btn btn-primary">$ {{ product.price }}</button>
+				    <button class="btn btn-success">Buy Now</button>
+			    </span>
+			</div>
+		{% endfor %}
+	</section>
+
+	<br>
+</div>
+<style type="text/css">
+	.posts, .create-form{
+		/*border: 1px solid black;*/
+		box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1) inset, -1px -1px 2px rgba(0, 0, 0, 0.1) inset;
+		padding: 10px;
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		flex-wrap: wrap;
+	}
+	.post{
+		box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
+		border-radius: 3px;
+		display: inline-block;
+		width: 300px;
+		height: 300px;
+		overflow: hidden;
+		padding: 5px;
+		position: relative;
+		margin-bottom: 10px;
+	}
+	.actions{
+		height: 40px;
+		width: 100%;
+		background-color: white;
+		position: absolute;
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		flex-wrap: wrap;
+		bottom: 0;
+	}
+	.create-form{
+		width: 100%;
+		flex-direction: column;
+		/*border: 1px solid black;*/
+	}
+	@media only screen and (min-width: 800px) {
+	 
+		textarea{
+			border: 10px solid black!important;
+			width: 700px;
+			height: 500px;
+		}
+	}
+
+</style>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "user/base.html" %}
+{% block body_block %}
+<div class="container">
+
+	<header><h2 align="center">Blog Posts</h2></header>
+
+	<section class="posts">
+		{% for value in text %}
+			<div class="post">
+			    {{ value.text | safe }}
+			    <div class="actions">
+			    	<a href="/post/{{value.id}}/" target="_blank"><button class="btn btn-success">Read more ...</button></a>
+			    	{% if user.is_authenticated %}
+			    	<!-- <a href="#"><button class="btn btn-primary">Edit</button></a> -->
+			    	{% endif %}
+			    </div>
+			</div>
+		{% endfor %}
+	</section>
+
+	<br>
+
+	{% if user.is_authenticated %}
+		<section class="create-form">
+			<h2 align="center">Create a Post</h2>
+			<form enctype="multipart/form-data" method="POST">
+	          {% csrf_token %}
+	          {{ postform.as_p }}
+	          <input type="submit" name="" value="Publish" class="btn btn-success">
+	        </form>
+		</section>
+	{% endif %}
+</div>
+<style type="text/css">
+	.posts, .create-form{
+		/*border: 1px solid black;*/
+		box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1) inset, -1px -1px 2px rgba(0, 0, 0, 0.1) inset;
+		padding: 10px;
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		flex-wrap: wrap;
+	}
+	.post{
+		box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
+		border-radius: 3px;
+		display: inline-block;
+		width: 300px;
+		height: 300px;
+		overflow: hidden;
+		padding: 5px;
+		position: relative;
+		margin-bottom: 10px;
+	}
+	.actions{
+		height: 40px;
+		width: 100%;
+		background-color: white;
+		position: absolute;
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		flex-wrap: wrap;
+		bottom: 0;
+	}
+	.create-form{
+		width: 100%;
+		flex-direction: column;
+		/*border: 1px solid black;*/
+	}
+	@media only screen and (min-width: 800px) {
+	 
+		textarea{
+			border: 10px solid black!important;
+			width: 700px;
+			height: 500px;
+		}
+	}
+
+</style>
+{% endblock %}
